@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RVET STUDIO ERP Prototype</title>
+  <style>
+    :root{
+      --bg:#F7F7F2;--surface:#FFFFFF;--text:#181A18;--muted:#73766F;--border:#E4E5DF;
+      --accent:#B7D52A;--green:#2F8F5B;--red:#E05B4E;--violet:#7057D9;--amber:#D99A2B;
+      --sidebar:#181A18;--sidebarText:#D8DAD4;
+    }
+    *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,select,input,textarea{font:inherit}
+    .app{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}.sidebar{background:var(--sidebar);color:white;padding:22px 16px;display:flex;flex-direction:column;gap:20px}.logo{display:flex;align-items:center;gap:10px;font-weight:800}.logo-dot{width:12px;height:12px;border-radius:50%;background:var(--accent)}.nav-group{display:flex;flex-direction:column;gap:6px}.nav-label{font-size:11px;letter-spacing:.12em;color:#969A91;margin:8px 10px 2px}.nav-btn{border:0;background:transparent;color:var(--sidebarText);display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 11px;border-radius:10px;cursor:pointer;text-align:left}.nav-btn:hover{background:#252825}.nav-btn.active{background:var(--accent);color:var(--text);font-weight:750}.tbc{width:18px;height:18px;border:1px solid currentColor;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;opacity:.65}.sidebar-foot{margin-top:auto;border-top:1px solid #30342F;padding-top:14px;color:#969A91;font-size:12px}.main{padding:26px 28px 40px;min-width:0}.topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:22px}.eyebrow{font-size:12px;color:var(--muted);margin-bottom:4px}.title{font-size:29px;font-weight:800;letter-spacing:-.03em}.actions{display:flex;gap:10px;flex-wrap:wrap}.control,.btn{min-height:42px;border:1px solid #D8DAD4;border-radius:10px;background:white;color:var(--text);padding:0 12px}.btn{font-weight:700;cursor:pointer}.btn.primary{background:var(--accent);border-color:var(--accent)}.btn.ghost{background:transparent}.page{display:none}.page.active{display:block}.grid-kpi{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:12px}.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px}.kpi-label{font-size:12px;color:var(--muted);margin-bottom:10px}.kpi-value{font-size:27px;font-weight:800;letter-spacing:-.03em}.kpi-main .kpi-value{font-size:40px}.kpi-sub{font-size:12px;color:var(--muted);margin-top:8px}.positive{color:var(--green)}.negative{color:var(--red)}.violet{color:var(--violet)}.layout-2{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(290px,.85fr);gap:14px;margin-top:14px}.section-title{font-size:16px;font-weight:800;margin-bottom:4px}.section-sub{font-size:12px;color:var(--muted);margin-bottom:16px}.chart{height:260px;position:relative}.chart-grid{position:absolute;inset:20px 0 28px;border-left:1px solid #ECEDE8;border-bottom:1px solid #ECEDE8;background:repeating-linear-gradient(to top,transparent 0,transparent 54px,#F0F1EC 55px)}svg{position:relative;width:100%;height:100%}.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted)}.legend span{display:flex;align-items:center;gap:7px}.legend i{width:9px;height:9px;border-radius:50%;display:block}.breakdown{display:flex;flex-direction:column;gap:12px}.bar-row{display:grid;grid-template-columns:minmax(110px,1fr) 1.6fr 50px;gap:10px;align-items:center;font-size:13px}.track{height:8px;background:#F0F1EC;border-radius:999px;overflow:hidden}.fill{height:100%;background:var(--text);border-radius:999px}.table-card{margin-top:14px;padding:0;overflow:hidden}.table-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:17px 18px;border-bottom:1px solid var(--border)}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:900px}th,td{padding:13px 16px;border-bottom:1px solid #EFEFEA;text-align:left;font-size:13px}th{background:#FBFBF8;color:var(--muted);font-size:11px;letter-spacing:.03em}.amount{text-align:right;font-weight:800}.pill{display:inline-flex;align-items:center;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:700;background:#F1F2ED;color:#4E514B;white-space:nowrap}.pill.in{background:#E8F4ED;color:var(--green)}.pill.out{background:#FCEBE8;color:#B94539}.pill.a{background:#EEF0FE;color:#5B61B5}.pill.b{background:#F7EBF5;color:#A24D92}.pill.common{background:#EFEFEA;color:#5F625B}.cash-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.filters{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.placeholder{padding:48px 20px;text-align:center;color:var(--muted)}.placeholder strong{display:block;color:var(--text);font-size:18px;margin-bottom:8px}.modal{position:fixed;inset:0;background:rgba(24,26,24,.35);display:none;align-items:center;justify-content:center;padding:18px;z-index:100}.modal.open{display:flex}.modal-panel{width:min(720px,100%);max-height:90vh;overflow:auto;background:white;border-radius:18px;border:1px solid var(--border);padding:22px}.modal-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:12px;color:var(--muted);font-weight:700}.field input,.field select,.field textarea{width:100%;border:1px solid #D8DAD4;border-radius:10px;padding:11px 12px;background:white;color:var(--text)}.field textarea{min-height:88px;resize:vertical}.code-preview{padding:11px 12px;border-radius:10px;background:#F5F6F1;color:var(--muted);font-size:13px}.upload{border:1px dashed #C8CBC1;border-radius:12px;padding:22px;text-align:center;color:var(--muted);background:#FAFAF7}.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}.mobile-bar{display:none}
+    @media(max-width:980px){.app{grid-template-columns:82px minmax(0,1fr)}.sidebar{padding:18px 10px}.logo span:last-child,.nav-label,.nav-btn .txt,.sidebar-foot{display:none}.nav-btn{justify-content:center}.main{padding:20px 16px 36px}.grid-kpi{grid-template-columns:1fr 1fr}.kpi-main{grid-column:1/-1}.layout-2{grid-template-columns:1fr}.cash-summary{grid-template-columns:1fr 1fr}}
+    @media(max-width:620px){.app{display:block}.sidebar{display:none}.main{padding:16px 12px 92px}.topbar{align-items:center}.title{font-size:24px}.actions{width:100%}.control,.btn{flex:1 1 auto}.grid-kpi,.cash-summary{grid-template-columns:1fr}.kpi-main{grid-column:auto}.kpi-main .kpi-value{font-size:33px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.mobile-bar{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);background:#181A18;padding:8px;z-index:90}.mobile-bar button{border:0;background:transparent;color:#D8DAD4;padding:10px 6px;font-size:12px}.mobile-bar button.active{color:#B7D52A;font-weight:800}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="logo"><span class="logo-dot"></span><span>RVET STUDIO</span></div>
+    <div class="nav-group"><div class="nav-label">OVERVIEW</div><button class="nav-btn active" data-page="dashboard"><span class="txt">Dashboard</span><span>⌂</span></button></div>
+    <div class="nav-group"><div class="nav-label">FINANCE</div>
+      <button class="nav-btn" data-page="cash"><span class="txt">Cash Flow</span><span>↕</span></button>
+      <button class="nav-btn" data-page="revenue"><span class="txt">Revenue</span><span>＋</span></button>
+      <button class="nav-btn" data-page="expenses"><span class="txt">Expenses</span><span>−</span></button>
+      <button class="nav-btn" data-page="investment"><span class="txt">Investment</span><span>◆</span></button>
+      <button class="nav-btn" data-page="budget"><span class="txt">Budget</span><span>◫</span></button>
+    </div>
+    <div class="nav-group"><div class="nav-label">SALES</div>
+      <button class="nav-btn" data-tbc="Orders"><span class="txt">Orders</span><span class="tbc">◇</span></button>
+      <button class="nav-btn" data-tbc="Customers"><span class="txt">Customers</span><span class="tbc">◇</span></button>
+      <button class="nav-btn" data-tbc="Channels"><span class="txt">Channels</span><span class="tbc">◇</span></button>
+    </div>
+    <div class="nav-group"><div class="nav-label">OPERATIONS</div>
+      <button class="nav-btn" data-tbc="Products"><span class="txt">Products</span><span class="tbc">◇</span></button>
+      <button class="nav-btn" data-tbc="Inventory"><span class="txt">Inventory</span><span class="tbc">◇</span></button>
+      <button class="nav-btn" data-tbc="Purchase"><span class="txt">Purchase</span><span class="tbc">◇</span></button>
+      <button class="nav-btn" data-tbc="Logistics"><span class="txt">Logistics</span><span class="tbc">◇</span></button>
+    </div>
+    <div class="nav-group"><div class="nav-label">ANALYTICS</div><button class="nav-btn" data-page="reports"><span class="txt">Reports</span><span>▥</span></button></div>
+    <div class="nav-group"><div class="nav-label">SYSTEM</div><button class="nav-btn" data-page="settings"><span class="txt">Settings</span><span>⚙</span></button></div>
+    <div class="sidebar-foot">Modular ERP Prototype v0.2</div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div><div class="eyebrow">RVET STUDIO / ERP</div><div class="title" id="pageTitle">Dashboard</div></div>
+      <div class="actions">
+        <select class="control" id="brandFilter"><option value="all">Company Total</option><option value="a">Brand A</option><option value="b">Brand B</option><option value="common">Corporate & Shared</option></select>
+        <select class="control"><option>Aug 2026</option><option>Jul 2026</option><option>YTD 2026</option></select>
+        <button class="btn primary" id="openTransaction">+ Transaction</button>
+      </div>
+    </div>
+
+    <section class="page active" id="dashboard">
+      <div class="grid-kpi">
+        <div class="card kpi-main"><div class="kpi-label">CURRENT CASH</div><div class="kpi-value">₩428,520,000</div><div class="kpi-sub">RVET STUDIO legal entity balance · Aug 26, 2026</div></div>
+        <div class="card"><div class="kpi-label">CASH IN</div><div class="kpi-value positive">+₩72.4M</div><div class="kpi-sub">This month</div></div>
+        <div class="card"><div class="kpi-label">CASH OUT</div><div class="kpi-value negative">-₩48.8M</div><div class="kpi-sub">This month</div></div>
+        <div class="card"><div class="kpi-label">NET CASH FLOW</div><div class="kpi-value positive">+₩23.6M</div><div class="kpi-sub">This month</div></div>
+      </div>
+      <div class="layout-2">
+        <div class="card"><div class="section-title">Cash Position</div><div class="section-sub">Monthly legal-entity cash balance</div><div class="chart"><div class="chart-grid"></div><svg viewBox="0 0 700 240" role="img" aria-label="Cash balance trend"><polyline points="35,180 150,155 260,170 375,120 490,102 655,72" fill="none" stroke="#181A18" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></polyline><circle cx="655" cy="72" r="6" fill="#B7D52A" stroke="#181A18" stroke-width="2"></circle><text x="35" y="226" font-size="12" fill="#73766F">Mar</text><text x="145" y="226" font-size="12" fill="#73766F">Apr</text><text x="255" y="226" font-size="12" fill="#73766F">May</text><text x="370" y="226" font-size="12" fill="#73766F">Jun</text><text x="485" y="226" font-size="12" fill="#73766F">Jul</text><text x="635" y="226" font-size="12" fill="#73766F">Aug</text></svg></div><div class="legend"><span><i style="background:#181A18"></i>Cash balance</span><span><i style="background:#B7D52A"></i>Current</span></div></div>
+        <div class="card"><div class="section-title">Expense Breakdown</div><div class="section-sub" id="breakdownSub">Company Total · Aug 2026</div><div class="breakdown"><div class="bar-row"><span>Marketing</span><div class="track"><div class="fill" style="width:76%"></div></div><b>32%</b></div><div class="bar-row"><span>Production</span><div class="track"><div class="fill" style="width:64%"></div></div><b>27%</b></div><div class="bar-row"><span>Payroll</span><div class="track"><div class="fill" style="width:50%"></div></div><b>21%</b></div><div class="bar-row"><span>Operations</span><div class="track"><div class="fill" style="width:28%"></div></div><b>12%</b></div><div class="bar-row"><span>Travel</span><div class="track"><div class="fill" style="width:19%"></div></div><b>8%</b></div></div></div>
+      </div>
+      <div class="card table-card"><div class="table-head"><div><div class="section-title">Recent Transactions</div><div class="section-sub" style="margin:0">Latest cash movements</div></div><button class="btn" data-go="cash">View Cash Flow</button></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Flow</th><th>Brand</th><th>Category</th><th>Description</th><th>Used by</th><th>Created by</th><th style="text-align:right">Amount</th></tr></thead><tbody id="recentBody"></tbody></table></div></div>
+    </section>
+
+    <section class="page" id="cash">
+      <div class="cash-summary"><div class="card"><div class="kpi-label">OPENING CASH</div><div class="kpi-value">₩404.9M</div></div><div class="card"><div class="kpi-label">CASH IN</div><div class="kpi-value positive">+₩72.4M</div></div><div class="card"><div class="kpi-label">CASH OUT</div><div class="kpi-value negative">-₩48.8M</div></div><div class="card"><div class="kpi-label">CLOSING CASH</div><div class="kpi-value">₩428.5M</div></div></div>
+      <div class="filters"><select class="control"><option>All Accounts</option><option>Operating Account</option><option>Corporate Card</option></select><select class="control"><option>All Flows</option><option>Cash In</option><option>Cash Out</option></select><button class="btn">Filter</button><button class="btn" id="exportBtn">↓ Excel</button></div>
+      <div class="card table-card"><div class="table-head"><div><div class="section-title">Cash Ledger</div><div class="section-sub" style="margin:0">Single source of truth for inflow and outflow</div></div></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Flow</th><th>Brand</th><th>Code</th><th>Category</th><th>Description</th><th>Account</th><th>Used by</th><th>Created by</th><th style="text-align:right">Amount</th><th style="text-align:right">Balance</th></tr></thead><tbody id="cashBody"></tbody></table></div></div>
+    </section>
+
+    <section class="page" id="revenue"><div class="card"><div class="section-title">Revenue</div><div class="section-sub">Brand-tagged revenue records. Orders and CRM will connect later.</div><div class="placeholder"><strong>Revenue module skeleton</strong>Domestic / International · B2B / D2C · Brand A / Brand B</div></div></section>
+    <section class="page" id="expenses"><div class="card"><div class="section-title">Expenses</div><div class="section-sub">Corporate card, bank transfer, receipt, expense code and brand tagging.</div><div class="placeholder"><strong>Expense module skeleton</strong>Next step: receipt upload · expense entry · missing receipt workflow</div></div></section>
+    <section class="page" id="investment"><div class="card"><div class="section-title">Investment</div><div class="section-sub">Legal-entity level investment tracking.</div><div class="placeholder"><strong>Investment module skeleton</strong>Round · Investor · Date · Amount · Type · Memo</div></div></section>
+    <section class="page" id="budget"><div class="card"><div class="section-title">Budget</div><div class="section-sub">Budget vs actual for company, brand and category.</div><div class="placeholder"><strong>Budget module skeleton</strong>Budget · Actual · Remaining · Utilization</div></div></section>
+    <section class="page" id="reports"><div class="card"><div class="section-title">Reports</div><div class="section-sub">Export-ready management reports.</div><div class="placeholder"><strong>Reports module skeleton</strong>Cash report · Brand view · Expense export · Investment use report</div></div></section>
+    <section class="page" id="settings"><div class="card"><div class="section-title">Settings</div><div class="section-sub">Editable master data for future ERP expansion.</div><div class="placeholder"><strong>Master data</strong>Brands · Expense Codes · Accounts · Cards · Users · Permissions</div></div></section>
+  </main>
+</div>
+
+<div class="mobile-bar"><button data-mobile="dashboard" class="active">Home</button><button data-mobile="cash">Cash</button><button id="mobileAdd">＋ Add</button><button data-mobile="reports">Reports</button></div>
+
+<div class="modal" id="transactionModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-panel">
+    <div class="modal-top"><div><div class="eyebrow">NEW TRANSACTION</div><div class="section-title" id="modalTitle">Add Transaction</div></div><button class="btn ghost" id="closeModal">✕</button></div>
+    <form id="transactionForm">
+      <div class="form-grid">
+        <div class="field"><label>Flow</label><select id="flow"><option value="OUT">Cash Out</option><option value="IN">Cash In</option></select></div>
+        <div class="field"><label>Brand</label><select id="brand"><option value="a">Brand A</option><option value="b">Brand B</option><option value="common">Corporate & Shared</option></select></div>
+        <div class="field"><label>Date</label><input type="date" id="date" value="2026-08-26" /></div>
+        <div class="field"><label>Amount</label><input type="number" id="amount" min="0" step="100" placeholder="38500" required /></div>
+        <div class="field"><label>Category</label><select id="category"><option value="Transportation">Transportation</option><option value="Marketing">Marketing</option><option value="Production">Production</option><option value="Operations">Operations</option><option value="Investment">Investment</option><option value="Revenue">Revenue</option></select></div>
+        <div class="field"><label>Sub Category</label><select id="subcategory"><option>Taxi</option><option>Paid Ads</option><option>Packaging</option><option>Office Rent</option><option>Equity</option><option>Intl B2B</option></select></div>
+        <div class="field"><label>Expense / Revenue Code</label><div class="code-preview" id="codePreview">70-03 · Automatically assigned</div></div>
+        <div class="field"><label>Payment Method</label><select id="account"><option>Corporate Card</option><option>Operating Account</option><option>Bank Transfer</option></select></div>
+        <div class="field"><label>Merchant / Counterparty</label><input id="merchant" placeholder="Kakao T" /></div>
+        <div class="field"><label>Used by</label><select id="usedBy"><option>본인</option><option>대표</option><option>팀원 A</option><option>팀원 B</option></select></div>
+        <div class="field full"><label>Description / Purpose</label><textarea id="description" placeholder="Sales meeting transportation"></textarea></div>
+        <div class="field full"><label>Receipt</label><div class="upload">＋ Upload receipt<br><small>JPG · PNG · PDF · OCR classification can be added later</small></div></div>
+        <div class="field full"><label>System audit</label><div class="code-preview">Created by: Current logged-in user · Created at: Auto-generated</div></div>
+      </div>
+      <div class="modal-actions"><button type="button" class="btn" id="cancelModal">Cancel</button><button type="submit" class="btn primary">Save Transaction</button></div>
+    </form>
+  </div>
+</div>
+
+<script>
+const tx=[
+{date:'Aug 26',flow:'OUT',brand:'a',brandLabel:'Brand A',code:'70-03',cat:'Transportation',desc:'Kakao T · Sales meeting',acct:'Corporate Card',used:'본인',created:'JH',amount:-38500,balance:428520000},
+{date:'Aug 25',flow:'OUT',brand:'b',brandLabel:'Brand B',code:'30-01',cat:'Marketing',desc:'META Ads',acct:'Corporate Card',used:'팀원 A',created:'JH',amount:-1250000,balance:428558500},
+{date:'Aug 24',flow:'IN',brand:'a',brandLabel:'Brand A',code:'03-02',cat:'Intl B2B',desc:'Distributor payment',acct:'Operating Account',used:'-',created:'JH',amount:8500000,balance:429808500},
+{date:'Aug 21',flow:'OUT',brand:'common',brandLabel:'Corporate & Shared',code:'60-01',cat:'Operations',desc:'Office rent',acct:'Operating Account',used:'Corporate',created:'JH',amount:-5000000,balance:421308500},
+{date:'Aug 18',flow:'IN',brand:'common',brandLabel:'Corporate & Shared',code:'01-01',cat:'Investment',desc:'Seed investment',acct:'Operating Account',used:'-',created:'JH',amount:500000000,balance:426308500},
+{date:'Aug 14',flow:'OUT',brand:'a',brandLabel:'Brand A',code:'20-02',cat:'Packaging',desc:'Primary package production',acct:'Operating Account',used:'팀원 B',created:'JH',amount:-18000000,balance:-73691500}
+];
+const qs=s=>document.querySelector(s), qsa=s=>[...document.querySelectorAll(s)];
+const brandFilter=qs('#brandFilter');
+const brandClass=b=>b==='a'?'a':b==='b'?'b':'common';
+const money=n=>(n<0?'-':'+')+'₩'+Math.abs(n).toLocaleString('ko-KR');
+function render(){
+ const v=brandFilter.value; const list=v==='all'?tx:tx.filter(t=>t.brand===v);
+ qs('#breakdownSub').textContent=brandFilter.options[brandFilter.selectedIndex].text+' · Aug 2026';
+ qs('#recentBody').innerHTML=list.slice(0,5).map(t=>`<tr><td>${t.date}</td><td><span class="pill ${t.flow==='IN'?'in':'out'}">${t.flow}</span></td><td><span class="pill ${brandClass(t.brand)}">${t.brandLabel}</span></td><td>${t.cat}</td><td>${t.desc}</td><td>${t.used}</td><td>${t.created}</td><td class="amount ${t.amount>0?'positive':'negative'}">${money(t.amount)}</td></tr>`).join('')||'<tr><td colspan="8">No transactions</td></tr>';
+ qs('#cashBody').innerHTML=list.map(t=>`<tr><td>${t.date}</td><td><span class="pill ${t.flow==='IN'?'in':'out'}">${t.flow}</span></td><td><span class="pill ${brandClass(t.brand)}">${t.brandLabel}</span></td><td>${t.code}</td><td>${t.cat}</td><td>${t.desc}</td><td>${t.acct}</td><td>${t.used}</td><td>${t.created}</td><td class="amount ${t.amount>0?'positive':'negative'}">${money(t.amount)}</td><td class="amount">₩${t.balance.toLocaleString('ko-KR')}</td></tr>`).join('')||'<tr><td colspan="11">No transactions</td></tr>';
+}
+brandFilter.addEventListener('change',render); render();
+function openPage(id,title){qsa('.page').forEach(p=>p.classList.toggle('active',p.id===id));qsa('.nav-btn[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===id));qsa('.mobile-bar button[data-mobile]').forEach(b=>b.classList.toggle('active',b.dataset.mobile===id));qs('#pageTitle').textContent=title||({dashboard:'Dashboard',cash:'Cash Flow',revenue:'Revenue',expenses:'Expenses',investment:'Investment',budget:'Budget',reports:'Reports',settings:'Settings'}[id]||'ERP')}
+qsa('.nav-btn[data-page]').forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.page,b.querySelector('.txt')?.textContent)));
+qsa('[data-go]').forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.go)));
+qsa('.mobile-bar button[data-mobile]').forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.mobile)));
+qsa('.nav-btn[data-tbc]').forEach(b=>b.addEventListener('click',()=>alert(`${b.dataset.tbc} is a planned TBC module.`)));
+const modal=qs('#transactionModal'); const openModal=()=>modal.classList.add('open'); const closeModal=()=>modal.classList.remove('open');
+qs('#openTransaction').addEventListener('click',openModal); qs('#mobileAdd').addEventListener('click',openModal); qs('#closeModal').addEventListener('click',closeModal); qs('#cancelModal').addEventListener('click',closeModal); modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+const codeMap={Transportation:'70-03',Marketing:'30-01',Production:'20-02',Operations:'60-01',Investment:'01-01',Revenue:'03-02'};
+qs('#category').addEventListener('change',e=>qs('#codePreview').textContent=(codeMap[e.target.value]||'TBC')+' · Automatically assigned');
+qs('#transactionForm').addEventListener('submit',e=>{e.preventDefault(); const amount=Number(qs('#amount').value||0); if(!amount)return alert('Amount를 입력해주세요.'); const flow=qs('#flow').value; const brand=qs('#brand').value; const labels={a:'Brand A',b:'Brand B',common:'Corporate & Shared'}; const cat=qs('#category').value; tx.unshift({date:'Aug 26',flow,brand,brandLabel:labels[brand],code:codeMap[cat]||'TBC',cat,desc:(qs('#merchant').value||cat)+' · '+(qs('#description').value||'New transaction'),acct:qs('#account').value,used:qs('#usedBy').value,created:'JH',amount:flow==='OUT'?-Math.abs(amount):Math.abs(amount),balance:428520000}); render(); closeModal(); openPage('cash'); e.target.reset(); qs('#codePreview').textContent='70-03 · Automatically assigned';});
+qs('#exportBtn').addEventListener('click',()=>{const headers=['Date','Flow','Brand','Code','Category','Description','Account','Used by','Created by','Amount','Balance']; const rows=tx.map(t=>[t.date,t.flow,t.brandLabel,t.code,t.cat,t.desc,t.acct,t.used,t.created,t.amount,t.balance]); const csv=[headers,...rows].map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n'); const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='RVET_STUDIO_Cash_Ledger.csv'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),500);});
+</script>
+</body>
+</html>
